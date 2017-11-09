@@ -1,0 +1,10 @@
+## Interface: 11200
+## Title: aDF |cff7fff7fby |cffF5F54AAtreyyo
+## Author: Atreyyo
+## Version: 2.9
+## Notes: Armor and Debuff frame
+## DefaultState: Enabled
+## LoadOnDemand: 0
+## SavedVariables: aDF_x, aDF_y, guiOptions, gui_Options, gui_chan, gui_Optionsxy
+
+aDF.lua
