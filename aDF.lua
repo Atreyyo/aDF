@@ -59,6 +59,15 @@ aDFDebuffs = {
 	["Vampiric Embrace"] = "Interface\\Icons\\Spell_Shadow_UnsummonBuilding",
 }
 
+function aDF_Default()
+	if gui_Options = nil then
+		for k,v in pairs(aDFDebuffs) do
+			if gui_Options[k] = nil then
+				gui_Options[k] = 1
+			end
+		end
+	end
+}
 
 -- the main frame
 
@@ -820,6 +829,7 @@ end
 
 function aDF:OnEvent()
 	if event == "ADDON_LOADED" and arg1 == "aDF" then
+		aDF_Default()
 		aDF_target = nil
 		if gui_chan == nil then gui_chan = Say end
 		aDF:Init() -- loads frame, see the function
