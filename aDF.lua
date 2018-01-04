@@ -67,7 +67,7 @@ function aDF_Default()
 			end
 		end
 	end
-}
+end
 
 -- the main frame
 
