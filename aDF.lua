@@ -61,6 +61,7 @@ aDFDebuffs = {
 
 function aDF_Default()
 	if guiOptions == nil then
+		guiOptions = {}
 		for k,v in pairs(aDFDebuffs) do
 			if guiOptions[k] == nil then
 				guiOptions[k] = 1
