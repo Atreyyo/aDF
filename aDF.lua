@@ -814,7 +814,7 @@ function aDF:GetDebuff(name,buff,stacks)
 		aDF_tooltip:ClearLines()
    		aDF_tooltip:SetUnitDebuff(name,a)
 		local aDFtext = aDF_tooltipTextL:GetText()
-		if aDFtext == buff then 
+		if string.find(aDFtext,buff) then 
 			if stacks == 1 then
 				return s
 			else
