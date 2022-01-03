@@ -236,7 +236,7 @@ function aDF.Create_guiframe(name)
 	frame.Icon:SetWidth(25)
 	frame.Icon:SetHeight(25)
 	frame.Icon:SetPoint("CENTER",-30,0)
-	DEFAULT_CHAT_FRAME:AddMessage("----- Adding new gui checkbox")
+	--DEFAULT_CHAT_FRAME:AddMessage("----- Adding new gui checkbox")
 	return frame
 end
 
@@ -413,7 +413,7 @@ function aDF.Options:Gui()
 	for _,name in pairs(temptable) do
 		y=y-40
 		if y < -360 then y=-120; x=x+140 end
-		DEFAULT_CHAT_FRAME:AddMessage("Name of frame: "..name.." ypos: "..y)
+		--DEFAULT_CHAT_FRAME:AddMessage("Name of frame: "..name.." ypos: "..y)
 		aDF_guiframes[name] = aDF_guiframes[name] or aDF.Create_guiframe(name)
 		local frame = aDF_guiframes[name]
 		frame:SetPoint("TOPLEFT",x,y)
