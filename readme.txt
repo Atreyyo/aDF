@@ -2,6 +2,7 @@
 ## Author: Atreyyo @ Vanillagaming.org
 ######################################
 
+*** Always delete aDF.lua in the WTF folder when updating this addon, or if you are unsure where to find it, delete entire WTF folder.
 
 Debuffs shown:
 
@@ -17,13 +18,20 @@ Debuffs shown:
 ["Curse of Shadows"]
 ["Shadow Bolt"]
 ["Shadow Weaving"]
-["Elemental Vulnerability"]
+["Expose Armor"]
 
 
 Feel free to make any suggestions to the addon.
 
 
 --- Versions ---
+
+--- aDF 3.0
+
+Added Expose Armor and rewrote some code
+Removed ["Elemental Vulnerability"] ( Mage t3 6setbonus proc )
+
+--- aDF 2.9
 
 added Vampiric Embrace
 
