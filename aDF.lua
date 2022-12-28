@@ -28,7 +28,6 @@ aDFSpells = {
 	["Sunder Armor"] = "Sunder Armor",
 	["Armor Shatter"] = "Armor Shatter",
 	["Faerie Fire"] = "Faerie Fire",
-	["Crystal Yield"] = "Crystal Yield",
 	["Nightfall"] = "Spell Vulnerability",
 	["Scorch"] = "Fire Vulnerability",
 	["Ignite"] = "Ignite",
@@ -37,9 +36,10 @@ aDFSpells = {
 	["Curse of Shadows"] = "Curse of Shadow",
 	["Shadow Bolt"] = "Shadow Vulnerability",
 	["Shadow Weaving"] = "Shadow Weaving",
-	["Vampiric Embrace"] = "Vampiric Embrace", 
-	["Expose Armor"] = "Expose Armor", 
+	["Vampiric Embrace"] = "Vampiric Embrace",
+	["Expose Armor"] = "Expose Armor",
 }
+	--["Crystal Yield"] = "Crystal Yield",
 	--["Mage T3 6/9 Bonus"] = "Elemental Vulnerability",
 -- table with names and textures 
 
@@ -47,7 +47,6 @@ aDFDebuffs = {
 	["Sunder Armor"] = "Interface\\Icons\\Ability_Warrior_Sunder",
 	["Armor Shatter"] = "Interface\\Icons\\INV_Axe_12",
 	["Faerie Fire"] = "Interface\\Icons\\Spell_Nature_FaerieFire",
-	["Crystal Yield"] = "Interface\\Icons\\INV_Misc_Gem_Amethyst_01",
 	["Nightfall"] = "Interface\\Icons\\Spell_Holy_ElunesGrace",
 	["Scorch"] = "Interface\\Icons\\Spell_Fire_SoulBurn",
 	["Ignite"] = "Interface\\Icons\\Spell_Fire_Incinerate",
@@ -59,6 +58,7 @@ aDFDebuffs = {
 	["Vampiric Embrace"] = "Interface\\Icons\\Spell_Shadow_UnsummonBuilding",
 	["Expose Armor"] = "Interface\\Icons\\Ability_Warrior_Riposte",
 }
+	--["Crystal Yield"] = "Interface\\Icons\\INV_Misc_Gem_Amethyst_01",
 	--["Elemental Vulnerability"] = "Interface\\Icons\\Spell_Holy_Dizzy",
 function aDF_Default()
 	if guiOptions == nil then
