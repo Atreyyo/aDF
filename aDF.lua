@@ -78,7 +78,9 @@ end
 function aDF:Init()
 	aDF.Drag = { }
 	function aDF.Drag:StartMoving()
-		this:StartMoving()
+		if ( IsShiftKeyDown() ) then
+			this:StartMoving()
+		end
 	end
 	
 	function aDF.Drag:StopMovingOrSizing()
