@@ -37,9 +37,9 @@ aDFSpells = {
 	["Curse of Shadows"] = "Curse of Shadow",
 	["Shadow Bolt"] = "Shadow Vulnerability",
 	["Shadow Weaving"] = "Shadow Weaving",
-	["Vampiric Embrace"] = "Vampiric Embrace",
 	["Expose Armor"] = "Expose Armor",
 }
+	--["Vampiric Embrace"] = "Vampiric Embrace",
 	--["Crystal Yield"] = "Crystal Yield",
 	--["Mage T3 6/9 Bonus"] = "Elemental Vulnerability",
 -- table with names and textures 
@@ -57,9 +57,9 @@ aDFDebuffs = {
 	["Curse of Shadows"] = "Interface\\Icons\\Spell_Shadow_CurseOfAchimonde",
 	["Shadow Bolt"] = "Interface\\Icons\\Spell_Shadow_ShadowBolt",
 	["Shadow Weaving"] = "Interface\\Icons\\Spell_Shadow_BlackPlague",
-	["Vampiric Embrace"] = "Interface\\Icons\\Spell_Shadow_UnsummonBuilding",
 	["Expose Armor"] = "Interface\\Icons\\Ability_Warrior_Riposte",
 }
+	--["Vampiric Embrace"] = "Interface\\Icons\\Spell_Shadow_UnsummonBuilding",
 	--["Crystal Yield"] = "Interface\\Icons\\INV_Misc_Gem_Amethyst_01",
 	--["Elemental Vulnerability"] = "Interface\\Icons\\Spell_Holy_Dizzy",
 function aDF_Default()
