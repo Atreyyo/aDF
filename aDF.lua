@@ -62,6 +62,37 @@ aDFDebuffs = {
 	--["Vampiric Embrace"] = "Interface\\Icons\\Spell_Shadow_UnsummonBuilding",
 	--["Crystal Yield"] = "Interface\\Icons\\INV_Misc_Gem_Amethyst_01",
 	--["Elemental Vulnerability"] = "Interface\\Icons\\Spell_Holy_Dizzy",
+
+aDFArmorVals = {
+	[90]   = "Sunder Armor x1", -- r1 x1
+	[180]  = "Sunder Armor",    -- r2 x1, or r1 x2
+	[270]  = "Sunder Armor",    -- r3 x1, or r1 x3
+	[540]  = "Sunder Armor",    -- r3 x2, or r2 x3
+	[810]  = "Sunder Armor x3", -- r3 x3
+	[360]  = "Sunder Armor",    -- r4 x1, or r1 x4 or r2 x2
+	[720]  = "Sunder Armor",    -- r4 x2, or r2 x4
+	[1080] = "Sunder Armor",    -- r4 x3, or r3 x4
+	[1440] = "Sunder Armor x4", -- r4 x4
+	[450]  = "Sunder Armor",    -- r5 x1, or r1 x5
+	[900]  = "Sunder Armor",    -- r5 x2, or r2 x5
+	[1350] = "Sunder Armor",    -- r5 x3, or r3 x5
+	[1800] = "Sunder Armor",    -- r5 x4, or r4 x5
+	[2250] = "Sunder Armor x5", -- r5 x5
+	[2550] = "Improved Expose Armor",
+	[1700] = "Untalented Expose Armor",
+	[505]  = "Faerie Fire",
+	[395]  = "Faerie Fire",
+	[285]  = "Faerie Fire",
+	[175]  = "Faerie Fire",
+	[640]  = "Curse of Recklessness",
+	[465]  = "Curse of Recklessness",
+	[290]  = "Curse of Recklessness",
+	[140]  = "Curse of Recklessness",
+	[600]  = "Annihilator x3",
+	[400]  = "Annihilator x2",
+	[200]  = "Annihilator x1",
+}
+
 function aDF_Default()
 	if guiOptions == nil then
 		guiOptions = {}
@@ -248,8 +279,19 @@ end
 
 function aDF:Update()
 	if aDF_target ~= nil then
+		local armorcurr = UnitResistance(aDF_target,0)
 --		aDF.armor:SetText(UnitResistance(aDF_target,0).." ["..math.floor(((UnitResistance(aDF_target,0) / (467.5 * UnitLevel("player") + UnitResistance(aDF_target,0) - 22167.5)) * 100),1).."%]")
-		aDF.armor:SetText(UnitResistance(aDF_target,0))
+		aDF.armor:SetText(armorcurr)
+		if armorcurr > aDF_armorprev then
+			local armordiff = armorcurr - aDF_armorprev
+			local diffreason = ""
+			if aDF_armorprev ~= 0 and aDFArmorVals[armordiff] then
+				diffreason = " Likely dropped " .. aDFArmorVals[armordiff]
+			end
+			SendChatMessage(UnitName(aDF_target).."'s armor has risen "..aDF_armorprev.." -> "..armorcurr.."."..diffreason, gui_chan)
+		end
+		aDF_armorprev = armorcurr
+
 		if gui_Options["Resistances"] == 1 then
 			aDF.res:SetText("|cffFF0000FR "..UnitResistance(aDF_target,2).." |cff00FF00NR "..UnitResistance(aDF_target,3).." |cff4AE8F5FrR "..UnitResistance(aDF_target,4).." |cff800080SR "..UnitResistance(aDF_target,5))
 		else
@@ -489,6 +531,7 @@ function aDF:OnEvent()
 	if event == "ADDON_LOADED" and arg1 == "aDF" then
 		aDF_Default()
 		aDF_target = nil
+		aDF_armorprev = 30000
 		if gui_chan == nil then gui_chan = Say end
 		aDF:Init() -- loads frame, see the function
 		aDF.Options:Gui() -- loads options frame
@@ -502,13 +545,14 @@ function aDF:OnEvent()
 		aDF:Update()
 	end
 	if event == "PLAYER_TARGET_CHANGED" then
-	aDF_target = nil
-	if UnitIsPlayer("target") then
-		aDF_target = "targettarget"
-	end
-	if UnitCanAttack("player", "target") then
-		aDF_target = "target"
-	end
+		aDF_target = nil
+		if UnitIsPlayer("target") then
+			aDF_target = "targettarget"
+		end
+		if UnitCanAttack("player", "target") then
+			aDF_target = "target"
+		end
+		aDF_armorprev = 30000
 		aDF:Update()
 	end
 end
