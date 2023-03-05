@@ -22,6 +22,8 @@ gui_chantbl = {
    "Raid_Warning"
  }
 
+local last_target_change_time = GetTime()
+
 -- translation table for debuff check on target
 
 aDFSpells = {
@@ -278,17 +280,25 @@ end
 -- update function for the text/debuff frames
 
 function aDF:Update()
-	if aDF_target ~= nil then
+	if aDF_target ~= nil and UnitExists(aDF_target) then
+		if aDF_target == 'targettarget' and GetTime() < (last_target_change_time + 1.3) then
+			-- we won't allow updates for a while to allow targettarget to catch up
+			adfprint('target changed too soon, delaying update')
+			return
+		end
 		local armorcurr = UnitResistance(aDF_target,0)
 --		aDF.armor:SetText(UnitResistance(aDF_target,0).." ["..math.floor(((UnitResistance(aDF_target,0) / (467.5 * UnitLevel("player") + UnitResistance(aDF_target,0) - 22167.5)) * 100),1).."%]")
 		aDF.armor:SetText(armorcurr)
+		-- adfprint(string.format('aDF_target %s targetname %s armorcurr %s armorprev %s', aDF_target, UnitName(aDF_target), armorcurr, aDF_armorprev))
 		if armorcurr > aDF_armorprev then
 			local armordiff = armorcurr - aDF_armorprev
 			local diffreason = ""
 			if aDF_armorprev ~= 0 and aDFArmorVals[armordiff] then
 				diffreason = " Likely dropped " .. aDFArmorVals[armordiff]
 			end
-			SendChatMessage(UnitName(aDF_target).."'s armor has risen "..aDF_armorprev.." -> "..armorcurr.."."..diffreason, gui_chan)
+			local msg = UnitName(aDF_target).."'s armor has risen "..aDF_armorprev.." -> "..armorcurr.."."..diffreason
+			-- adfprint(msg)
+			SendChatMessage(msg, gui_chan)
 		end
 		aDF_armorprev = armorcurr
 
@@ -509,9 +519,9 @@ function aDF:GetDebuff(name,buff,stacks)
 	local a=1
 	while UnitDebuff(name,a) do
 		local _, s = UnitDebuff(name,a)
-   		aDF_tooltip:SetOwner(UIParent, "ANCHOR_NONE");
+		aDF_tooltip:SetOwner(UIParent, "ANCHOR_NONE");
 		aDF_tooltip:ClearLines()
-   		aDF_tooltip:SetUnitDebuff(name,a)
+		aDF_tooltip:SetUnitDebuff(name,a)
 		local aDFtext = aDF_tooltipTextL:GetText()
 		if string.find(aDFtext,buff) then 
 			if stacks == 1 then
@@ -546,6 +556,7 @@ function aDF:OnEvent()
 	end
 	if event == "PLAYER_TARGET_CHANGED" then
 		aDF_target = nil
+		last_target_change_time = GetTime()
 		if UnitIsPlayer("target") then
 			aDF_target = "targettarget"
 		end
@@ -553,6 +564,7 @@ function aDF:OnEvent()
 			aDF_target = "target"
 		end
 		aDF_armorprev = 30000
+		-- adfprint('PLAYER_TARGET_CHANGED ' .. tostring(aDF_target))
 		aDF:Update()
 	end
 end
@@ -589,6 +601,6 @@ SLASH_ADF_SLASH2 = '/ADF'
 
 -- debug
 
-function print(arg1)
-	DEFAULT_CHAT_FRAME:AddMessage("|cffCC121D debug|r "..arg1)
+function adfprint(arg1)
+	DEFAULT_CHAT_FRAME:AddMessage("|cffCC121D adf debug|r "..arg1)
 end
