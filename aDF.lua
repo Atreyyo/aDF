@@ -298,7 +298,11 @@ function aDF:Update()
 			end
 			local msg = UnitName(aDF_target).."'s armor has risen "..aDF_armorprev.." -> "..armorcurr.."."..diffreason
 			-- adfprint(msg)
-			SendChatMessage(msg, gui_chan)
+			if aDF_target == 'target' then
+				-- targettarget does not trigger events when it changes. this means it's hard to tell apart units with the same name, so we don't allow notifications for it
+				SendChatMessage(msg, gui_chan)
+			end
+
 		end
 		aDF_armorprev = armorcurr
 
