@@ -280,10 +280,10 @@ end
 -- update function for the text/debuff frames
 
 function aDF:Update()
-	if aDF_target ~= nil and UnitExists(aDF_target) then
+	if aDF_target ~= nil and UnitExists(aDF_target) and not UnitIsDead(aDF_target) then
 		if aDF_target == 'targettarget' and GetTime() < (last_target_change_time + 1.3) then
 			-- we won't allow updates for a while to allow targettarget to catch up
-			adfprint('target changed too soon, delaying update')
+			-- adfprint('target changed too soon, delaying update')
 			return
 		end
 		local armorcurr = UnitResistance(aDF_target,0)
