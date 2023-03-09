@@ -280,10 +280,10 @@ end
 -- update function for the text/debuff frames
 
 function aDF:Update()
-	if aDF_target ~= nil and UnitExists(aDF_target) then
+	if aDF_target ~= nil and UnitExists(aDF_target) and not UnitIsDead(aDF_target) then
 		if aDF_target == 'targettarget' and GetTime() < (last_target_change_time + 1.3) then
 			-- we won't allow updates for a while to allow targettarget to catch up
-			adfprint('target changed too soon, delaying update')
+			-- adfprint('target changed too soon, delaying update')
 			return
 		end
 		local armorcurr = UnitResistance(aDF_target,0)
@@ -298,7 +298,11 @@ function aDF:Update()
 			end
 			local msg = UnitName(aDF_target).."'s armor has risen "..aDF_armorprev.." -> "..armorcurr.."."..diffreason
 			-- adfprint(msg)
-			SendChatMessage(msg, gui_chan)
+			if aDF_target == 'target' then
+				-- targettarget does not trigger events when it changes. this means it's hard to tell apart units with the same name, so we don't allow notifications for it
+				SendChatMessage(msg, gui_chan)
+			end
+
 		end
 		aDF_armorprev = armorcurr
 
