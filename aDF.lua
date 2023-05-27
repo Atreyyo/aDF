@@ -80,19 +80,32 @@ aDFArmorVals = {
 	[1350] = "Sunder Armor",    -- r5 x3, or r3 x5
 	[1800] = "Sunder Armor",    -- r5 x4, or r4 x5
 	[2250] = "Sunder Armor x5", -- r5 x5
+--[600]  = "Improved Expose Armor",   -- r1 -- conflicts with anni/rivenspike
+--[400]  = "Untalented Expose Armor", -- r1 -- conflicts with anni/rivenspike
+-- 	[] = "Improved Expose Armor",  -- 5pt IEA r2 r3 r4 values unknown
+	[725]  = "Untalented Expose Armor",
+-- 	[] = "Improved Expose Armor",
+	[1050] = "Untalented Expose Armor",
+-- 	[] = "Improved Expose Armor",
+	[1375] = "Untalented Expose Armor",
+	[510]  = "Fucked up IEA?",
+	[1020] = "Fucked up IEA?",
+	[1530] = "Fucked up IEA?",
+	[2040] = "Fucked up IEA?",
 	[2550] = "Improved Expose Armor",
 	[1700] = "Untalented Expose Armor",
 	[505]  = "Faerie Fire",
-	[395]  = "Faerie Fire",
-	[285]  = "Faerie Fire",
-	[175]  = "Faerie Fire",
+	[395]  = "Faerie Fire R3",
+	[285]  = "Faerie Fire R2",
+	[175]  = "Faerie Fire R1",
 	[640]  = "Curse of Recklessness",
-	[465]  = "Curse of Recklessness",
-	[290]  = "Curse of Recklessness",
-	[140]  = "Curse of Recklessness",
-	[600]  = "Annihilator x3",
-	[400]  = "Annihilator x2",
-	[200]  = "Annihilator x1",
+	[465]  = "Curse of Recklessness R3",
+	[290]  = "Curse of Recklessness R2",
+	[140]  = "Curse of Recklessness R1",
+	[600]  = "Annihilator x3 ?",
+	[400]  = "Annihilator x2 ?",
+	[200]  = "Annihilator x1 ?",
+	[50]   = "Torch of Holy Flame",
 }
 
 function aDF_Default()
@@ -294,9 +307,9 @@ function aDF:Update()
 			local armordiff = armorcurr - aDF_armorprev
 			local diffreason = ""
 			if aDF_armorprev ~= 0 and aDFArmorVals[armordiff] then
-				diffreason = " Likely dropped " .. aDFArmorVals[armordiff]
+				diffreason = " (Dropped " .. aDFArmorVals[armordiff] .. ")"
 			end
-			local msg = UnitName(aDF_target).."'s armor has risen "..aDF_armorprev.." -> "..armorcurr.."."..diffreason
+			local msg = UnitName(aDF_target).."'s armor: "..aDF_armorprev.." -> "..armorcurr..diffreason
 			-- adfprint(msg)
 			if aDF_target == 'target' then
 				-- targettarget does not trigger events when it changes. this means it's hard to tell apart units with the same name, so we don't allow notifications for it
